@@ -1,48 +1,33 @@
-const app = express();
-app.use();
+const app = require('./app');
+const dotenv = require('dotenv');
+const db = require('./db/mongodb/Database.js');
+const server = require('http').createServer(app);
+dotenv.config();
 
-const db = require("./app/models");
-const Role = db.role;
+process.on('uncaughtException', err => {
+    console.log(err.name, err.message);
+    console.log('UNCAUGHT EXCEPTION! Shutting down...');
+    process.exit(1);
+});
 
+//Now listen to this port
+server.listen(process.env.PORT);
 
+server.on('error', (err) => {
+    console.error(err);
+});
 
-db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    initial();
-  })
-  .catch(err => {
-    console.error("Connection error", err);
-    process.exit();
-  });
+server.on('listening', async () => {
 
-function initial() {
-  Role.estimatedDocumentCount((err, count) => {
-    if (!err && count === 0) {
-      new Role({
-        name: "user"
-      }).save(err => {
-        if (err) {
-          console.log("error", err);
-        }
+    console.info(`STCDiving is Listening to port ${process.env.PORT}`);
+    db.connectionDB()
 
-        console.log("added 'user' to roles collection");
-      });
+});
 
- 
-      new Role({
-        name: "admin"
-      }).save(err => {
-        if (err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'admin' to roles collection");
-      });
-    }
-  });
-}
+process.on('unhandledRejection', err => {
+    console.log(err.name, err.message);
+    console.log('UNHANDLED REJECTION! Shutting down...');
+    server.close(() => {
+        process.exit(1);
+    })
+});

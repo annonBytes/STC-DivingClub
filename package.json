@@ -1,0 +1,32 @@
+{
+  "name": "STC-Diving-Club",
+  "version": "1.0.0",
+  "description": "Admin Membership platform for STC Diving Club",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annonBytes/STC-DivingClub.git"
+  },
+  "keywords": [],
+  "author": "Ockiya Daniel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annonBytes/STC-DivingClub/issues"
+  },
+  "homepage": "https://github.com/annonBytes/STC-DivingClub#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "mysql": "^2.18.1"
+  }
+}

@@ -1,25 +1,17 @@
-const express = require('express')
-const cors = require('cors')
+const express = require("express");
+const bodyParser = require('body-parser');
+
+//require these routes created seperately
+const authRoute = require("./routes/Authentication/authApi.js");
 
 
-const app = express()
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = express();
+app.use(bodyParser.json());
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-  };
 
-app.use(cors(corsOptions));
+app.use(authRoute);
 
-//simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to stc application." });
-  });
-  
+// sendSMTPMail()
 
-const port = process.env.PORT || 8000
-app.listen(port, () => {
-  console.log(`Server running on https://localhost:${port}`);
-}) 
-
+//export route for unit testing and chat
+module.exports = app;
