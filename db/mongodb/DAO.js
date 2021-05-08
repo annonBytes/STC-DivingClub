@@ -2,7 +2,7 @@ const User = require('./mongoose_models/User')
 const mongoose = require('mongoose');
 
 
-class DAO{
+class dao{
 
     async create(model, data){
         const ModelClass = require(`./mongoose_models/${model}`);
@@ -55,5 +55,5 @@ class DAO{
     }
 }
 
-module.exports = new DAO();
+module.exports = new dao();
 

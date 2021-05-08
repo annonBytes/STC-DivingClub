@@ -1,15 +1,14 @@
-const DAO = require('../../db/mongodb/DAO')
+const dao = require('../../db/mongodb/dao')
 const jwt = require('jsonwebtoken')
 const hasher = require('../../utils/helpers/hasher')
-const { emailValidator, stringValidator } = require('../../utils/helpers/validator')
-const dotenv = require('dotenv')
-const { createResponse } = require('../../utils/createResponse')
+const {emailValidator, stringValidator} = require('../../utils/helpers/validator')
+const dotenv = require('dotenv');
+const {createResponse} = require('../../utils/createResponse')
+dotenv.config();
 
-dotenv.config()
+const UserModel = "User";
 
-const UserModel = "User"
-const JWT_SECRET = process.env.JWT_SECRET
-
+const JWT_SECRET = process.env.JWT_SECRET;
 
 class Auth {
 
@@ -52,8 +51,8 @@ class Auth {
 
         }
     }
-
-
+    
+    
     async signin(req, res, error)
     {
         const {email,password} = req.body
@@ -83,6 +82,5 @@ class Auth {
         }
     }
 }
-
 
 module.exports = new Auth();
